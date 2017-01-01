@@ -73,7 +73,7 @@ def send_message(recipient_id, message_text):
                 "type":"template",
                 "payload":{
                     "template_type":"button",
-                    "text":"What do you want to do next?",
+                    "text":"我能為你做些什麼",
                     "buttons":[
                         {
                         "type":"web_url",
