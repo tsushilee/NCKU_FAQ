@@ -40,7 +40,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "我還不會說多少話")
+                    send_message(sender_id, "ㄏㄏ")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -73,7 +73,7 @@ def send_message(recipient_id, message_text):
                 "type":"template",
                 "payload":{
                     "template_type":"button",
-                    "text":"我能為你做些什麼",
+                    "text": message_text ,
                     "buttons":[
                         {
                         "type":"web_url",
