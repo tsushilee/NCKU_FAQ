@@ -77,8 +77,8 @@ def send_message(recipient_id, message_text):
                     "buttons":[
                         {
                         "type":"web_url",
-                        "url":"https://petersapparel.parseapp.com",
-                        "title":"Show Website"
+                        "url":"https://www.gamer.com.tw",
+                        "title":"去巴哈"
                         },
                         {
                         "type":"postback",
