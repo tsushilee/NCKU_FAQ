@@ -82,7 +82,7 @@ def send_message(recipient_id, message_text):
                         },
                         {
                         "type":"postback",
-                        "title":"沒事拉",
+                        "title":"沒事",
                         "payload":"USER_DEFINED_PAYLOAD"
                         }
                         ]
