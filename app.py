@@ -36,7 +36,7 @@ def webhook():
             for messaging_event in entry["messaging"]:
 
                 if messaging_event.get("message"):  # someone sent us a message
-                    quick_reply = ""
+
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
@@ -88,23 +88,10 @@ def send_message(recipient_id, message_text):
         "Content-Type": "application/json"
     }
     data = json.dumps({
-    #     "recipient": {
-    #         "id": recipient_id
-    #     },
-    #     "message":{
-    #         "text":"Pick a color:",
-    #         "quick_replies":[
-    #             {
-    #             "content_type":"text",
-    #             "title":"成功入口",
-    #             "payload":"成功入口"
-    #             },
-    #             {
-    #             "content_type":"text",
-    #             "title":"Green",
-    #             "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-    #     }
-    #   ]
+        "recipient": {
+            "id": recipient_id
+        },
+        "message":{
             "attachment":{
                 "type":"template",
                 "payload":{
