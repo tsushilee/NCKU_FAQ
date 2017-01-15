@@ -57,8 +57,12 @@ def webhook():
     return "ok", 200
 
 def handle_message(message_text):
-    if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text :
+    if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
         return '信箱問題'
+    if u'成功入口'.encode("utf8") in message_text :
+        if editdistance.eval('成功入口忘記密碼 想要改密碼', message_text ) < 3
+            return '請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
+        return '成功入口'
 
     return message_text
 
@@ -86,8 +90,8 @@ def send_message(recipient_id, message_text):
                     "buttons":[
                         {
                         "type":"web_url",
-                        "url":"https://www.gamer.com.tw",
-                        "title":"去巴哈"
+                        "url":"http://myidp.sso2.ncku.edu.tw/nidp/idff/sso?id=3&sid=0&option=credential&sid=0",
+                        "title":"成功入口"
                         },
                         {
                         "type":"postback",
