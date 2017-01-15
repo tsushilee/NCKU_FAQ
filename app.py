@@ -63,8 +63,19 @@ def webhook():
     return "ok", 200
 
 def handle_message(message_text):
-    if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
-        return '信箱問題'
+    if u'不是我要的答案'.encode("utf8") in message_text :
+        return '請您等待專人為您回答'
+    # Email
+    if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
+        if u'進入'.encode("utf8") in message_text or u'登入'.encode("utf8") in message_text :
+            return '若無法登入信箱，可以請您嘗試在成功入口介面更改一次密碼，此動作將會同步您的成功入口密碼與個人信箱密碼'
+        if u'沒收到'.encode("utf8") in message_text or u'沒有收到'.encode("utf8") in message_text :
+            return '若有沒收到的信，有可能是因為被學校信件過濾系統誤判成是垃圾信件，若是使用個人信箱可以登入這個網頁找尋中途被攔截到的信件：http://antispam.ncku.edu.tw/symphony/login.html ，若是公務信箱則登入下面這個：http://eantispam.ncku.edu.tw/symphony/login.html'
+        if u'申請'.encode("utf8") in message_text :
+            return '若要申請個人信箱，請先登入成功入口後，點選教職員工個人設定裡的個人用電子郵件帳號申請，填入相關資料後便可啟用'
+        if 'outlook' in message_text :
+            return '可參考計中說明文件 http://cc.ncku.edu.tw/files/11-1255-14653.php?Lang=zh-tw'
+
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
         return '若您在學校以外的網路,啟用時必須先啟動vpn,才能進行產品認證'
 
