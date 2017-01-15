@@ -76,16 +76,38 @@ def handle_message(message_text):
         if 'outlook' in message_text :
             return '可參考計中說明文件 http://cc.ncku.edu.tw/files/11-1255-14653.php?Lang=zh-tw'
 
+    #授權軟體
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
-        return '若您在學校以外的網路,啟用時必須先啟動vpn,才能進行產品認證'
+        return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證'
 
+    #成功入口
     if u'成功入口'.encode("utf8") in message_text :
-        print(editdistance.eval('成功入口忘記密碼 想要改密碼', message_text ))
-        print(type(editdistance.eval('成功入口忘記密碼 想要改密碼', message_text )))
         if u'改'.encode("utf8") in message_text :
             return '若需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
+        if 'Novell Access Manager' in message_text :
+            return '出現此畫面, 是因為已連線逾時的關係(登入太久而無繼續動作, 且未登出), 只要點選右上角的"登出", 登出後, 再回到成功入口登入頁, 重新輸入帳號密碼登入即可!'
+        if 'mybox' in message_text :
+            return '若無法連結mybox，可能是mybox帳號尚未開通，請先到mybox系統 (http://mybox.ncku.edu.tw) 啟用你的mybox帳號'
+        if u'畢業'.encode("utf8") in message_text :
+            if u'成績'.encode("utf8") in message_text :
+                return '請由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
+            return '成功入口僅服務在校學生，故學生畢業後，成功入口帳號即停用。個人mail帳號，則於畢業6個月後停用，而E-portfolio數位學習歷程檔可由該系統原網址登入使用。'
 
-    return message_text
+    #dorm
+    if u'宿'.encode("utf8") in message_text :
+        if 'p2p' in message_text :
+            return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
+        if u'故障'.encode("utf8") in message_text :
+            return '若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候'
+        if 'authentication failed'.encode("utf8") in message_text :
+            return '出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
+        return '請參考宿網管理系統 http://www.cc.ncku.edu.tw/dorm/ '
+
+    if u'資安通報'.encode("utf8") in message_text :
+        return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
+
+
+    return '請您等待專人為您回答'
 
 
 def send_message(recipient_id, message_text):
