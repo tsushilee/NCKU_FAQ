@@ -41,11 +41,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
                     message_text = message_text.encode('utf-8').lower()
-                    quick_reply = messaging_event["message"]["quick_reply"]["payload"]
-
-                    if quick_reply != "" :
-                        reply = handle_message( quick_reply )
-                    else : reply = handle_message( message_text )
+                    
+                    reply = handle_message( message_text )
 
                     send_message(sender_id, reply )
 
