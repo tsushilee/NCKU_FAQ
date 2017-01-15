@@ -96,25 +96,24 @@ def send_message(recipient_id, message_text):
                 "type":"template",
                 "payload":{
                     "template_type":"button",
-                    "text": message_text
-                    #,
-                    # "buttons":[
-                    #     {
-                    #     "type":"web_url",
-                    #     "url":"http://myidp.sso2.ncku.edu.tw/nidp/idff/sso?id=3&sid=0&option=credential&sid=0",
-                    #     "title":"成功入口"
-                    #     },
-                    #     {
-                    #     "type":"web_url",
-                    #     "url":"http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw",
-                    #     "title":"SSL VPN服務"
-                    #     },
-                    #     {
-                    #         "type":"postback",
-                    #         "title":"更改密碼",
-                    #         "payload":"更改密碼"
-                    #     }
-                    #     ]
+                    "text": message_text ,
+                    "buttons":[
+                        {
+                        "type":"web_url",
+                        "url":"http://myidp.sso2.ncku.edu.tw/nidp/idff/sso?id=3&sid=0&option=credential&sid=0",
+                        "title":"成功入口"
+                        },
+                        {
+                        "type":"web_url",
+                        "url":"http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw",
+                        "title":"SSL VPN服務"
+                        },
+                        {
+                            "type":"postback",
+                            "title":"更改密碼",
+                            "payload":"更改密碼"
+                        }
+                        ]
                 }
             }
         }
