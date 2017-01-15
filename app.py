@@ -42,7 +42,7 @@ def webhook():
 
                     print( type(message_text) )
 
-                    send_message(sender_id, message_text)
+                    send_message(sender_id, message_text.encode('utf-8'))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
