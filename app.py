@@ -110,8 +110,8 @@ def send_message(recipient_id, message_text):
                         },
                         {
                             "type":"postback",
-                            "title":"更改密碼",
-                            "payload":"更改密碼"
+                            "title":"不是我要的答案",
+                            "payload":"不是我要的答案"
                         }
                         ]
                 }
