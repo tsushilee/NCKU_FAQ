@@ -67,7 +67,7 @@ def handle_message(message_text):
         return '請您等待專人為您回答'
 
     if u'你好'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
-        if len(message_text < 8 ):
+        if len(message_text ) < 8:
             return '你好！請問我能為您做些什麼？'
     # Email
     if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
