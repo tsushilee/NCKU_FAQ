@@ -60,8 +60,10 @@ def handle_message(message_text):
     if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
         return '信箱問題'
     if u'成功入口'.encode("utf8") in message_text :
-        if editdistance.eval('成功入口忘記密碼 想要改密碼', message_text ) < 3
-            return '請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
+        print(editdistance.eval('成功入口忘記密碼 想要改密碼', message_text ))
+        print(type(editdistance.eval('成功入口忘記密碼 想要改密碼', message_text )))
+        #if editdistance.eval('成功入口忘記密碼 想要改密碼', message_text ) < 3
+            #return '請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
         return '成功入口問題'
 
     return message_text
