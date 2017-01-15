@@ -39,11 +39,11 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    message_text = message_text.encode('utf-8')
-                    if u'信箱'.encode("utf8") in message_text :
-                        send_message(sender_id, '信箱問題' )
+                    message_text = message_text.encode('utf-8').lower()
 
-                    else : send_message(sender_id, message_text )
+                    reply = handle_message( message_text )
+
+                    send_message(sender_id, reply )
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -55,6 +55,10 @@ def webhook():
                     pass
 
     return "ok", 200
+
+def handle_message(message_text):
+    if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text :
+        send_message(sender_id, '信箱問題' )
 
 
 def send_message(recipient_id, message_text):
