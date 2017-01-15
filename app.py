@@ -58,7 +58,7 @@ def webhook():
 
 def handle_message(message_text):
     if u'信箱'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text :
-        return u'信箱問題'
+        return '信箱問題'
 
     return message_text
 
