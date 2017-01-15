@@ -96,8 +96,8 @@ def send_message(recipient_id, message_text):
             "quick_replies":[
                 {
                 "content_type":"text",
-                "title":"Red",
-                "payload":"更改密碼"
+                "title":"成功入口",
+                "payload":"成功入口"
                 },
                 {
                 "content_type":"text",
