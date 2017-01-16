@@ -82,7 +82,7 @@ def handle_message(message_text):
             return '可參考計中說明文件 http://cc.ncku.edu.tw/files/11-1255-14653.php?Lang=zh-tw'
 
     #授權軟體
-    if u'校園授權軟體'.encode("utf8") in message_text :
+    if u'校園授權軟體'.encode("utf8") in message_text or u'產品金鑰'.encode("utf8") in message_text :
         return '若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
         return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw '
@@ -102,17 +102,17 @@ def handle_message(message_text):
 
     #成績
     if u'成績'.encode("utf8") in message_text :
-        return '請由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
+        return '請由成功入口進去後，E-portfolio數位學習歷程檔裡就有成績查詢的選項 ， 或由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
 
     #dorm
     if u'宿'.encode("utf8") in message_text :
-        if u'斷掉'.encode("utf8") in message_text or u'連不上'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
+        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連不上'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
             return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題將請專人為您服務'
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
             return '若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候'
-        if 'authentication failed'.encode("utf8") in message_text :
+        if 'authentication failed' in message_text :
             return '出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
         return '請參考宿網管理系統 http://www.cc.ncku.edu.tw/dorm/ '
 
