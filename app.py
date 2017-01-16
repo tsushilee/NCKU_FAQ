@@ -63,17 +63,17 @@ def webhook():
     return "ok", 200
 
 def handle_message(message_text):
-    if u'不是我要的答案'.encode("utf8") in message_text :
+    if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
         return '請您等待專人為您回答'
 
-    if u'你好'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
-        if len(message_text ) < 8:
+    if u'你好'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
+        if len(message_text ) < 10:
             return '你好！請問我能為您做些什麼？'
     # Email
-    if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text :
-        if u'進入'.encode("utf8") in message_text or u'登入'.encode("utf8") in message_text :
+    if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
+        if u'進入'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text or u'使用'.encode("utf8") in message_text or u'密碼錯誤'.encode("utf8") in message_text:
             return '若無法登入信箱，可以請您嘗試在成功入口介面更改一次密碼，此動作將會同步您的成功入口密碼與個人信箱密碼'
-        if u'沒收到'.encode("utf8") in message_text or u'沒有收到'.encode("utf8") in message_text :
+        if u'沒收到'.encode("utf8") in message_text or u'沒有收到'.encode("utf8") in message_text or u'垃圾信'.encode("utf8") in message_text :
             return '若有沒收到的信，有可能是因為被學校信件過濾系統誤判成是垃圾信件，若是使用個人信箱可以登入這個網頁找尋中途被攔截到的信件：http://antispam.ncku.edu.tw/symphony/login.html ，若是公務信箱則登入下面這個：http://eantispam.ncku.edu.tw/symphony/login.html'
         if u'申請'.encode("utf8") in message_text :
             return '若要申請個人信箱，請先登入成功入口後，點選教職員工個人設定裡的個人用電子郵件帳號申請，填入相關資料後便可啟用'
@@ -81,27 +81,35 @@ def handle_message(message_text):
             return '可參考計中說明文件 http://cc.ncku.edu.tw/files/11-1255-14653.php?Lang=zh-tw'
 
     #授權軟體
+    if u'校園授權軟體'.encode("utf8") in message_text :
+        return '若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
-        return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證'
+        return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw '
 
     #成功入口
     if u'成功入口'.encode("utf8") in message_text :
-        if u'改'.encode("utf8") in message_text :
+        if u'改'.encode("utf8") in message_text or u'無法'.encode("utf8") in message_text or u'忘'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text :
             return '若需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
-        if 'Novell Access Manager' in message_text :
-            return '出現此畫面, 是因為已連線逾時的關係(登入太久而無繼續動作, 且未登出), 只要點選右上角的"登出", 登出後, 再回到成功入口登入頁, 重新輸入帳號密碼登入即可!'
-        if 'mybox' in message_text :
-            return '若無法連結mybox，可能是mybox帳號尚未開通，請先到mybox系統 (http://mybox.ncku.edu.tw) 啟用你的mybox帳號'
-        if u'畢業'.encode("utf8") in message_text :
-            if u'成績'.encode("utf8") in message_text :
-                return '請由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
-            return '成功入口僅服務在校學生，故學生畢業後，成功入口帳號即停用。個人mail帳號，則於畢業6個月後停用，而E-portfolio數位學習歷程檔可由該系統原網址登入使用。'
+
+    #mybox
+    if 'mybox' in message_text :
+        return '若無法連結mybox，可能是mybox帳號尚未開通，請先到mybox系統 (http://mybox.ncku.edu.tw) 啟用你的mybox帳號'
+
+    #畢業
+    if u'畢業'.encode("utf8") in message_text :
+        return '成功入口僅服務在校學生，故學生畢業後，成功入口帳號即停用。個人mail帳號，則於畢業6個月後停用，而E-portfolio數位學習歷程檔可由該系統原網址登入使用。'
+
+    #成績
+    if u'成績'.encode("utf8") in message_text :
+        return '請由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
 
     #dorm
     if u'宿'.encode("utf8") in message_text :
+        if u'斷掉'.encode("utf8") in message_text or u'連不上'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
+            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題將請專人為您服務'
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
-        if u'故障'.encode("utf8") in message_text :
+        if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
             return '若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候'
         if 'authentication failed'.encode("utf8") in message_text :
             return '出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
