@@ -67,7 +67,7 @@ def handle_message(message_text):
     if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
         return '請您等待專人為您回答'
 
-    if u'你好'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
+    if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
             return '你好！請問我能為您做些什麼？'
     # Email
@@ -84,8 +84,8 @@ def handle_message(message_text):
     #授權軟體
     if u'校園授權軟體'.encode("utf8") in message_text or u'產品金鑰'.encode("utf8") in message_text :
         return '若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
-    if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
-        return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw '
+        if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'授權軟體'.encode("utf8") in message_text  or 'office' in message_text or 'visual studio' in message_text :
+            return '若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw '
 
     #成功入口
     if u'成功入口'.encode("utf8") in message_text :
@@ -106,7 +106,7 @@ def handle_message(message_text):
 
     #dorm
     if u'宿'.encode("utf8") in message_text :
-        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連不上'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
+        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
             return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題將請專人為您服務'
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
@@ -144,16 +144,6 @@ def send_message(recipient_id, message_text):
                     "template_type":"button",
                     "text": message_text ,
                     "buttons":[
-                        {
-                        "type":"web_url",
-                        "url":"http://myidp.sso2.ncku.edu.tw/nidp/idff/sso?id=3&sid=0&option=credential&sid=0",
-                        "title":"成功入口"
-                        },
-                        {
-                        "type":"web_url",
-                        "url":"http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw",
-                        "title":"SSL VPN服務"
-                        },
                         {
                             "type":"postback",
                             "title":"不是我要的答案",
