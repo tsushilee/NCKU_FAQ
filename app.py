@@ -3,11 +3,25 @@ import os
 import sys
 import json
 import editdistance
+import threading, time
 
 import requests
 from flask import Flask, request
 
 app = Flask(__name__)
+
+user_dict = {}
+thread_flag = False
+
+def check_user_status():
+    global user_dict
+    while True :
+        for key in user_dict :
+            if time.time() - user_dict[key] > 180 :
+                user_dict.pop(key, None)
+
+        time.sleep(180)
+
 
 
 @app.route('/', methods=['GET'])
@@ -27,6 +41,13 @@ def webhook():
 
     # endpoint for processing incoming messaging events
 
+    global thread_flag   #only run this thread one time
+    global user_dict
+    if not thread_flag :
+        threading.Thread(target = check_user_status, args = (), name = 'check_thread').start()
+        thread_flag = True
+
+
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
@@ -44,9 +65,10 @@ def webhook():
                         message_text = messaging_event["message"]["text"]  # the message's text
                         message_text = message_text.encode('utf-8').lower()
 
-                        reply = handle_message( message_text )
+                        reply = handle_message( message_text, sender_id )
 
-                        send_message(sender_id, reply )
+                        if not sender_id in user_dict : # not in time interval
+                            send_message( sender_id, reply )
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -59,13 +81,17 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["postback"]["payload"]  # the message's text
                     message_text = message_text.encode('utf-8').lower()
-                    reply = handle_message( message_text )
-                    send_message(sender_id, reply )
+                    reply = handle_message( message_text, sender_id )
+                    if not sender_id in user_dict : # not in time interval
+                        send_message( sender_id, reply )
 
     return "ok", 200
 
-def handle_message(message_text):
+def handle_message(message_text, sender_id):
+    global user_dict
+
     if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
+        user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
         return '請您等待專人為您回答'
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
@@ -157,6 +183,7 @@ def handle_message(message_text):
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
 
 
+    user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
     return '請您等待專人為您回答'
 
 
