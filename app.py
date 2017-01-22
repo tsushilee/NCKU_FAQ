@@ -17,10 +17,10 @@ def check_user_status():
     global user_dict
     while True :
         for key in user_dict :
-            if time.time() - user_dict[key] > 180 :
+            if time.time() - user_dict[key] > 1800 :
                 user_dict.pop(key, None)
 
-        time.sleep(180)
+        time.sleep(1800)
 
 
 
@@ -60,7 +60,6 @@ def webhook():
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-                    print(messaging_event["recipient"])
                     if "text" in messaging_event["message"] :
                         message_text = messaging_event["message"]["text"]  # the message's text
                         message_text = message_text.encode('utf-8').lower()
@@ -69,6 +68,7 @@ def webhook():
 
                         if not sender_id in user_dict : # not in time interval
                             send_message( sender_id, reply )
+                            if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -91,7 +91,6 @@ def handle_message(message_text, sender_id):
     global user_dict
 
     if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
-        user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
         return '請您等待專人為您回答'
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
@@ -138,12 +137,17 @@ def handle_message(message_text, sender_id):
     if 'visual studio' in message_text :
         return '1.visual studio 無限制校內網路，安裝完即可使用。\n2.2013版前無需輸入序號，但2015版需要輸入序號:7DHGB-NW9XQ-Q9GT6-BMGMC-GQ7XY。\nhttp://www.cc.ncku.edu.tw/download/key.htm\n3.2013版可在成大mybox下載(無需校內網路)。'
     if u'網頁'.encode("utf8") in message_text :
-        if 'Forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text or u'無法下載'.encode("utf8") in message_text :
-            return '1.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n2.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+        if 'Forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text
+            or u'無法下載'.encode("utf8") in message_text or u'壞'.encode("utf8") in message_text :
+            return '1.請在網路和共用中心的網際網路中IP和DNA皆設定為自動取得，並從新開啟瀏覽器\n2.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n3.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
         if u'開'.encode("utf8") in message_text :
             if u'不'.encode("utf8") in message_text :
                 return '1.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n2.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
     if u'vpn'.encode("utf8") in message_text :
+        if u'安裝'.encode("utf8") in message_text or u'下載'.encode("utf8") in message_text or u'用'.encode("utf8") in message_text :
+            return '請參考http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 的使用說明'
+        if u'連'.encode("utf8") in message_text or u'卡'.encode("utf8") in message_text :
+            return '如您是使用網頁版請到http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 下載連線軟體使用，並參考使用說明進行安裝及連線；若您是使用連線軟體，請先參考http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 的使用說明，並特別注意VPN使用完畢請登出以免影響下一次登入'
         if u'教學'.encode("utf8") in message_text or u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text :
             return '1.開啟網頁 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw\n2.\na.網頁方式連線，請參照網頁。\nb.軟體方式連線(推薦)：\n(1)下載ssl vpn連線軟體，解壓縮後安裝。(2)程式集→執行Juniper Network/Network Connect.exe。(3)程式上方輸入登入網址：https://sslvpn9.twaren.net/ncku →執行。(4)輸入成大信箱(成功入口)帳密。登入後右下角圖示顯示已連線。(5)最後確認ip檢查是否連線成功:google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。'
 
@@ -183,7 +187,6 @@ def handle_message(message_text, sender_id):
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
 
 
-    user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
     return '請您等待專人為您回答'
 
 
