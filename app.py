@@ -16,7 +16,7 @@ thread_flag = False
 def check_user_status():
     global user_dict
     while True :
-        for key in user_dict :
+        for key in user_dict.keys() :
             if time.time() - user_dict[key] > 18 :
                 user_dict.pop(key, None)
 
