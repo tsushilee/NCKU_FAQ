@@ -17,10 +17,10 @@ def check_user_status():
     global user_dict
     while True :
         for key in user_dict :
-            if time.time() - user_dict[key] > 1800 :
+            if time.time() - user_dict[key] > 18 :
                 user_dict.pop(key, None)
 
-        time.sleep(1800)
+        time.sleep(18)
 
 
 
@@ -67,8 +67,8 @@ def webhook():
                         reply = handle_message( message_text, sender_id )
 
                         if not sender_id in user_dict : # not in time interval
-                            send_message( sender_id, reply )
                             if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
+                            send_message( sender_id, reply )
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -83,6 +83,7 @@ def webhook():
                     message_text = message_text.encode('utf-8').lower()
                     reply = handle_message( message_text, sender_id )
                     if not sender_id in user_dict : # not in time interval
+                        user_dict[sender_id] = time.time()
                         send_message( sender_id, reply )
 
     return "ok", 200
