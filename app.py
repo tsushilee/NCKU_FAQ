@@ -6,6 +6,7 @@ import editdistance
 import threading, time
 import urllib2
 import urllib
+import re
 
 import requests
 from flask import Flask, request
@@ -92,6 +93,7 @@ def webhook():
 
 def handle_message(message_text, sender_id):
     global user_dict
+    ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', message_text )
 
     if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
         return '請您等待專人為您回答'
@@ -188,38 +190,38 @@ def handle_message(message_text, sender_id):
     if u'資安通報'.encode("utf8") in message_text :
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
 
-    if '計網中心查詢' in message_text :
-        start = message_text.find("ip:")
-        mac_start = message_text.find("mac:")
-        end = 0
-        mac_end = 0
-        if start >= 0 :
-            for i in range(len(message_text)) :
-                if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
-                    end = i
-                    break
-
-            for i in range(len(message_text)) :
-                if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
-                    mac_end = i
-                    break
-            ip = message_text[start+3:end]
-            mac = message_text[mac_start+4:mac_end]
-            print(ip)
-            print(mac)
+    if 'ip' in message_text and len(ip) > 0 :
+        # start = message_text.find("ip:")
+        # mac_start = message_text.find("mac:")
+        # end = 0
+        # mac_end = 0
+        # if start >= 0 :
+        #     for i in range(len(message_text)) :
+        #         if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
+        #             end = i
+        #             break
+        #
+        #     for i in range(len(message_text)) :
+        #         if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
+        #             mac_end = i
+        #             break
+        #     ip = message_text[start+3:end]
+        #     mac = message_text[mac_start+4:mac_end]
+        #     print(ip)
+        #     print(mac)
 
             data = {}
-            data['ip'] = unicode(ip.strip())
-            data['mac'] = unicode(mac.strip())
+            data['ip'] = unicode(ip[0])
+            data['mac'] = u'xx:xx:xx:xx:xx:xx'
             url_values = urllib.urlencode(data)
             print(url_values)
             full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
 
             response = urllib.urlopen(full_url).read()
             print(response)
-            if response == 'found!' :
-                return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
-            else : return '您的電腦不在資安通報鎖網名單中'
+            if response == 'found!':
+                return '您的電腦被暫停使用 請聯絡計網中心'
+            else : return '您的電腦不在鎖網名單中'
 
 
     return '請您等待專人為您回答'
