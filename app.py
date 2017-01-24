@@ -196,12 +196,12 @@ def handle_message(message_text, sender_id):
         if start >= 0 :
             for i in range(len(message_text)) :
                 if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
-                    end = i
+                    end = i-1
                     break
 
             for i in range(len(message_text)) :
                 if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
-                    mac_end = i
+                    mac_end = i-1
                     break
             ip = message_text[start:end]
             mac = message_text[mac_start:mac_end]
