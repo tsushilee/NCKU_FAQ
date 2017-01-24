@@ -210,7 +210,7 @@ def handle_message(message_text, sender_id):
 
             data = {}
             data['ip'] = unicode(ip.strip())
-            data['mac'] = unicode(macstrip())
+            data['mac'] = unicode(mac.strip())
             url_values = urllib.urlencode(data)
             print(url_values)
             full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
