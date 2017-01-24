@@ -103,13 +103,16 @@ def handle_message(message_text, sender_id):
     if u'不是我要的答案'.encode("utf8") in message_text :
         return '請您等待專人為您回答'
 
-    elif u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
+    if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
+        return '很高興能為您幫上忙～ 😀'
+
+    if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
             return '你好！請問我能為您做些什麼？'
     # Email
-    elif u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
+    if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
         if u'進入'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text or u'使用'.encode("utf8") in message_text or u'密碼錯誤'.encode("utf8") in message_text:
-            return '若無法登入信箱，可以請您嘗試在成功入口介面更改一次密碼，此動作將會同步您的成功入口密碼與個人信箱密碼'
+            return '若您是在校生:若無法登入信箱，可以請您嘗試在成功入口介面更改一次密碼，此動作將會同步您的成功入口密碼與個人信箱密碼。若您是畢業生:個人mail帳號，會於畢業6個月後停用，請在此6個月內將郵件中的信轉移到您個人使用的email中。'
         if u'沒收到'.encode("utf8") in message_text or u'沒有收到'.encode("utf8") in message_text or u'垃圾信'.encode("utf8") in message_text :
             return '若有沒收到的信，有可能是因為被學校信件過濾系統誤判成是垃圾信件，若是使用個人信箱可以登入這個網頁找尋中途被攔截到的信件：http://antispam.ncku.edu.tw/symphony/login.html ，若是公務信箱則登入下面這個：http://eantispam.ncku.edu.tw/symphony/login.html'
         if u'申請'.encode("utf8") in message_text :
@@ -166,7 +169,7 @@ def handle_message(message_text, sender_id):
     #成功入口
     if u'成功入口'.encode("utf8") in message_text :
         if u'改'.encode("utf8") in message_text or u'無法'.encode("utf8") in message_text or u'忘'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text :
-            return '若需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務'
+            return '若您是在校學生:若需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務。\n若您已是畢業生:成功入口僅服務在校學生，故學生畢業後，成功入口帳號即停用。'
 
     #mybox
     if 'mybox' in message_text :
