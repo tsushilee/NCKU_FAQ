@@ -188,7 +188,7 @@ def handle_message(message_text, sender_id):
     if u'資安通報'.encode("utf8") in message_text :
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
 
-    if u'你好棒棒快救我'.encode("utf8") in message_text :
+    if 'help me pls' in message_text :
         start = message_text.find("ip:")
         mac_start = message_text.find("mac:")
         end = 0
