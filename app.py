@@ -71,6 +71,9 @@ def webhook():
 
                         if not sender_id in user_dict : # not in time interval
                             if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
+                            for key in user_dict.keys() :
+                                print(key)
+                                print(user_dict[key])
                             send_message( sender_id, reply )
 
                 if messaging_event.get("delivery"):  # delivery confirmation
