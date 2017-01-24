@@ -217,8 +217,9 @@ def handle_message(message_text, sender_id):
 
             response = urllib.urlopen(full_url).read()
             print(response)
-            if response : return '??您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單'
-            else : return '??您的電腦不在資安通報鎖網名單中'
+            if response == 'found!' : 
+                return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單'
+            else : return '您的電腦不在資安通報鎖網名單中'
 
 
     return '請您等待專人為您回答'
