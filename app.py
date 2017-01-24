@@ -178,7 +178,7 @@ def handle_message(message_text, sender_id):
     #dorm
     if u'宿'.encode("utf8") in message_text :
         if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題請複製以下格式填入您的ip與mac address回覆以查詢 \n-------\nip:140.116.xxx.xxx  \nmac:xx:xx:xx:xx:xx:xx  \n 計網中心查詢\n-------\n '
+            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
