@@ -19,10 +19,10 @@ def check_user_status():
     global user_dict
     while True :
         for key in user_dict.keys() :
-            if time.time() - user_dict[key] > 18 :
+            if time.time() - user_dict[key] > 1800 :
                 user_dict.pop(key, None)
 
-        time.sleep(18)
+        time.sleep(1800)
 
 
 
@@ -196,12 +196,12 @@ def handle_message(message_text, sender_id):
         if start >= 0 :
             for i in range(len(message_text)) :
                 if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
-                    end = i-1
+                    end = i
                     break
 
             for i in range(len(message_text)) :
                 if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
-                    mac_end = i-1
+                    mac_end = i
                     break
             ip = message_text[start:end]
             mac = message_text[mac_start:mac_end]
@@ -212,7 +212,7 @@ def handle_message(message_text, sender_id):
             data['ip'] = unicode(ip)
             data['mac'] = unicode(mac)
             url_values = urllib.urlencode(data)
-            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + url_values
+            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
 
             response = urllib.urlopen(full_url).read()
             print(response)
