@@ -220,7 +220,7 @@ def handle_message(message_text, sender_id):
 
             data = {}
             data['ip'] = unicode(ip[0])
-            data['mac'] = u'xx:xx:xx:xx:xx:xx'
+            data['mac'] = u'xx:xx:xx:xx:xx:xx nothing here'
             url_values = urllib.urlencode(data)
             print(url_values)
             full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
@@ -232,7 +232,7 @@ def handle_message(message_text, sender_id):
             else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
 
-    return '請您等待專人為您回答🙂'
+    return '抱歉>< 我還無法處理這個問題，請您等待專人為您回答🙂'
 
 
 def send_message(recipient_id, message_text):
