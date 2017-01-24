@@ -4,6 +4,8 @@ import sys
 import json
 import editdistance
 import threading, time
+import urllib2
+import urllib
 
 import requests
 from flask import Flask, request
@@ -124,8 +126,8 @@ def handle_message(message_text, sender_id):
             return '您好，若無法啟用，請確認是否已連線校內網路：google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n若已連線校內網路，請問您的錯誤代碼error code為何?(小黑框裡倒數幾行，類似0xC...，若非一般常見錯誤代碼請等待專人協助或於中心二樓服務台服務時間內攜帶筆電前往詢問)。\n若未連線至校內網路，請使用vpn服務連線至校內網路再作啟用。http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
     if '0x80070005' in message_text :
         return '錯誤代碼:0x80070005，未使用系統管理員身份執行，請在啟用檔上按右鍵選擇"以系統管理員身份執行"。\n若按右鍵未出現"以系統管理員身份執行"選項，表示您尚未將下載的啟用壓縮檔解壓縮，請按右鍵解壓縮或是直接將內部檔案拉至桌面亦可，謝謝。'
-    if '0XC004F074' in message_text :
-        return '錯誤代碼:0XC004F074，1.請確認是否已連線校內網路。google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n2.請確認電腦右下角時間是否正確。(時區及時間上下午都要對，時區確定為台北+8:00，再使用網路同步時間。)\n3.若您ip已是成大140.116 上述兩項亦沒問題卻認證失敗，請嘗試使用vpn連線後再行認證。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+    if '0xc004f074' in message_text :
+        return '錯誤代碼:0xc004F074，1.請確認是否已連線校內網路。google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n2.請確認電腦右下角時間是否正確。(時區及時間上下午都要對，時區確定為台北+8:00，再使用網路同步時間。)\n3.若您ip已是成大140.116 上述兩項亦沒問題卻認證失敗，請嘗試使用vpn連線後再行認證。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
     if 'script' in message_text :
         return '您好，找不到script可能是以下兩種情形\n1.啟用檔未解壓縮。若在檔案上按右鍵無"以系統管理員身份執行"選項，即可能未解壓縮，請按右鍵解壓縮或是直接將.bat檔拉至桌面亦可。\n2.啟用檔不符合軟體版本。若同一軟體有A.B兩種啟用檔，不知道用哪一個的話，可以兩個都下載下來解壓縮都啟用試試。\nhttp://www.cc.ncku.edu.tw/download/'
     if 'matlab' in message_text :
@@ -174,7 +176,7 @@ def handle_message(message_text, sender_id):
     #dorm
     if u'宿'.encode("utf8") in message_text :
         if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題將請專人為您服務'
+            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題請輸入ip:140.116.xxx.xxx mac:xx:xx:xx:xx:xx:xx 跟通關密語 "你好棒棒快救我" 之後請帶著虔誠的心送出訊息'
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
@@ -185,6 +187,35 @@ def handle_message(message_text, sender_id):
 
     if u'資安通報'.encode("utf8") in message_text :
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
+
+    if u'你好棒棒快救我'.encode("utf8") in message_text :
+        start = message_text.find("ip:")
+        mac_start = message_text.find("mac:")
+        end = 0
+        mac_end = 0
+        if start >= 0 :
+            for i in range(len(message_text)) :
+                if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
+                    end = i
+                    break
+
+            for i in range(len(message_text)) :
+                if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
+                    mac_end = i
+                    break
+            ip = message_text[start:end]
+            mac = message_text[mac_start:mac_end]
+            print(ip)
+
+            data = {}
+            data['ip'] = '140.116.103.209'
+            data['mac'] = mac
+            url_values = urllib.urlencode(data)
+            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + url_values
+
+            response = urllib2.open(full_url).read()
+            if response : return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單'
+            else : return '您的電腦不在資安通報鎖網名單中'
 
 
     return '請您等待專人為您回答'
