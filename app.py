@@ -203,17 +203,17 @@ def handle_message(message_text, sender_id):
                 if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
                     mac_end = i
                     break
-            ip = message_text[start:end]
-            mac = message_text[mac_start:mac_end]
+            ip = message_text[start+3:end]
+            mac = message_text[mac_start+4:mac_end]
             print(ip)
             print(mac)
 
             data = {}
-            data['ip'] = unicode(ip).strip()
-            data['mac'] = unicode(mac).strip()
+            data['ip'] = ip
+            data['mac'] = mac
             url_values = urllib.urlencode(data)
             print(url_values)
-            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
+            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + url_values
 
             response = urllib.urlopen(full_url).read()
             print(response)
