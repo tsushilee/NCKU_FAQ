@@ -176,7 +176,7 @@ def handle_message(message_text, sender_id):
     #dorm
     if u'宿'.encode("utf8") in message_text :
         if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題請輸入ip:140.116.xxx.xxx mac:xx:xx:xx:xx:xx:xx 跟通關密語 "你好棒棒快救我" 之後請帶著虔誠的心送出訊息'
+            return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  若依然無法排除問題請複製以下格式填入您的ip與mac address回覆以查詢 \n-------\nip:140.116.xxx.xxx  \nmac:xx:xx:xx:xx:xx:xx  \n 計網中心查詢\n-------\n '
         if 'p2p' in message_text :
             return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
@@ -188,7 +188,7 @@ def handle_message(message_text, sender_id):
     if u'資安通報'.encode("utf8") in message_text :
         return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
 
-    if 'help me pls' in message_text :
+    if '計網中心查詢' in message_text :
         start = message_text.find("ip:")
         mac_start = message_text.find("mac:")
         end = 0
@@ -217,8 +217,8 @@ def handle_message(message_text, sender_id):
 
             response = urllib.urlopen(full_url).read()
             print(response)
-            if response == 'found!' : 
-                return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單'
+            if response == 'found!' :
+                return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
             else : return '您的電腦不在資安通報鎖網名單中'
 
 
