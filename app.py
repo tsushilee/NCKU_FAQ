@@ -49,7 +49,6 @@ def webhook():
     if not thread_flag :
         threading.Thread(target = check_user_status, args = (), name = 'check_thread').start()
         thread_flag = True
-        print("this should run only one time")
 
 
     data = request.get_json()
