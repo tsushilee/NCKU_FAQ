@@ -49,6 +49,7 @@ def webhook():
     if not thread_flag :
         threading.Thread(target = check_user_status, args = (), name = 'check_thread').start()
         thread_flag = True
+        print("this should run only one time")
 
 
     data = request.get_json()
@@ -77,7 +78,7 @@ def webhook():
                             if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
                             send_message( sender_id, reply )
                         pass
-                        
+
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
