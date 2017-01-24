@@ -145,7 +145,7 @@ def handle_message(message_text, sender_id):
     if 'visual studio' in message_text :
         return '1.visual studio 無限制校內網路，安裝完即可使用。\n2.2013版前無需輸入序號，但2015版需要輸入序號:7DHGB-NW9XQ-Q9GT6-BMGMC-GQ7XY。\nhttp://www.cc.ncku.edu.tw/download/key.htm\n3.2013版可在成大mybox下載(無需校內網路)。'
     if u'網頁'.encode("utf8") in message_text :
-        if 'Forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text or u'無法下載'.encode("utf8") in message_text or u'壞'.encode("utf8") in message_text :
+        if 'forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text or u'無法下載'.encode("utf8") in message_text or u'壞'.encode("utf8") in message_text :
             return '1.請在網路和共用中心的網際網路中IP和DNA皆設定為自動取得，並從新開啟瀏覽器\n2.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n3.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
         if u'開'.encode("utf8") in message_text or u'進'.encode("utf8") in message_text :
             if u'不'.encode("utf8") in message_text :
