@@ -214,6 +214,7 @@ def handle_message(message_text, sender_id):
             full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + url_values
 
             response = urllib.urlopen(full_url).read()
+            print(response)
             if response : return '您的電腦在資安通報鎖網名單中，請您填寫資安通報事件處理單'
             else : return '您的電腦不在資安通報鎖網名單中'
 
