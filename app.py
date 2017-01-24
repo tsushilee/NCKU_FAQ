@@ -221,7 +221,7 @@ def handle_message(message_text, sender_id):
             print(response)
             if response == 'found!':
                 return '您的電腦被暫停使用 請聯絡計網中心'
-            else : return '您的電腦不在鎖網名單中'
+            else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務'
 
 
     return '請您等待專人為您回答'
