@@ -209,11 +209,11 @@ def handle_message(message_text, sender_id):
             print(mac)
 
             data = {}
-            data['ip'] = ip
-            data['mac'] = mac
+            data['ip'] = unicode(ip.strip())
+            data['mac'] = unicode(macstrip())
             url_values = urllib.urlencode(data)
             print(url_values)
-            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + url_values
+            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
 
             response = urllib.urlopen(full_url).read()
             print(response)
