@@ -72,11 +72,12 @@ def webhook():
                         for key in user_dict.keys() :
                             print(key)
                             print(user_dict[key])
-                            
+
                         if not sender_id in user_dict : # not in time interval
                             if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
                             send_message( sender_id, reply )
-
+                        pass
+                        
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
@@ -99,14 +100,14 @@ def handle_message(message_text, sender_id):
     global user_dict
     ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', message_text )
 
-    if u'不是我要的答案'.encode("utf8") in message_text or 'hello~' in message_text or 'hello～' in message_text :
+    if u'不是我要的答案'.encode("utf8") in message_text :
         return '請您等待專人為您回答'
 
-    if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
+    elif u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
             return '你好！請問我能為您做些什麼？'
     # Email
-    if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
+    elif u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
         if u'進入'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text or u'使用'.encode("utf8") in message_text or u'密碼錯誤'.encode("utf8") in message_text:
             return '若無法登入信箱，可以請您嘗試在成功入口介面更改一次密碼，此動作將會同步您的成功入口密碼與個人信箱密碼'
         if u'沒收到'.encode("utf8") in message_text or u'沒有收到'.encode("utf8") in message_text or u'垃圾信'.encode("utf8") in message_text :
