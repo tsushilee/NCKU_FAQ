@@ -115,7 +115,7 @@ def handle_message(message_text, sender_id):
 #====================================================================
     #授權軟體
     if u'軟體'.encode("utf8") in message_text or 'win' in message_text or 'office' in message_text :
-        if u'借用'.encode("utf8") in message_text or u'光碟'.encode("utf8") in message_text:
+        if u'借'.encode("utf8") in message_text or u'光碟'.encode("utf8") in message_text:
             return '若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
         if u'下載'.encode("utf8") in message_text :
             return '您好，校園授權軟體下載有兩種方式:\n1.校園授權網頁下載(需連線校內網路) http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\n2.成功大學mybox(校外網路可下載，但若需要進行啟用授權步驟仍得連進校內網路才能成功啟用，第一次使用mybox需開通。) https://mybox.ncku.edu.tw/ 登入後左邊"共用資料夾"可下載。'
@@ -144,7 +144,7 @@ def handle_message(message_text, sender_id):
     if u'網頁'.encode("utf8") in message_text :
         if 'Forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text or u'無法下載'.encode("utf8") in message_text or u'壞'.encode("utf8") in message_text :
             return '1.請在網路和共用中心的網際網路中IP和DNA皆設定為自動取得，並從新開啟瀏覽器\n2.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n3.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
-        if u'開'.encode("utf8") in message_text :
+        if u'開'.encode("utf8") in message_text or u'進'.encode("utf8") in message_text :
             if u'不'.encode("utf8") in message_text :
                 return '1.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n2.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
     if u'vpn'.encode("utf8") in message_text :
