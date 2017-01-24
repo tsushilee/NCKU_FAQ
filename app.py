@@ -108,7 +108,7 @@ def handle_message(message_text, sender_id):
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
-            return '你好！請問我能為您做些什麼？'
+            return '你好！🙂\n請問我能為您做些什麼？'
     # Email
     if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
         if u'進入'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text or u'使用'.encode("utf8") in message_text or u'密碼錯誤'.encode("utf8") in message_text:
@@ -188,15 +188,15 @@ def handle_message(message_text, sender_id):
         if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
             return '1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
         if 'p2p' in message_text :
-            return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.'
+            return '因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.🙂'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
-            return '若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候'
+            return '若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候🙂'
         if 'authentication failed' in message_text :
-            return '出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
+            return '你好🙂  出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 \n2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
         return '請參考宿網管理系統 http://www.cc.ncku.edu.tw/dorm/ '
 
     if u'資安通報'.encode("utf8") in message_text :
-        return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓'
+        return '需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓🙂'
 
     if 'ip' in message_text and len(ip) > 0 :
         # start = message_text.find("ip:")
@@ -228,8 +228,8 @@ def handle_message(message_text, sender_id):
             response = urllib.urlopen(full_url).read()
             print(response)
             if response == 'found!':
-                return '您的電腦被暫停使用 請聯絡計網中心'
-            else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務'
+                return '您的電腦被暫停使用 請聯絡計網中心 😨'
+            else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
 
     return '請您等待專人為您回答'
