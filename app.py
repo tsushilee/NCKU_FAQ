@@ -228,7 +228,7 @@ def handle_message(message_text, sender_id):
             response = urllib.urlopen(full_url).read()
             print(response)
             if response == 'found!':
-                return '您的電腦被暫停使用 請聯絡計網中心 😨'
+                return '您的網路位置IP被暫停使用 請聯絡計網中心 😨'
             else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
 
