@@ -197,7 +197,7 @@ def handle_message(message_text, sender_id):
     #dorm
     if u'宿'.encode("utf8") in message_text :
         if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '您好🙂  1.請您使用其他電腦進行交叉測試 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
+            return '您好🙂  1.請您使用其他電腦進行交叉測試 http://www.cc.ncku.edu.tw/dorm/doc/check.php 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
         if 'p2p' in message_text :
             return '您好🙂  因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.🙂'
         if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
@@ -243,7 +243,7 @@ def handle_message(message_text, sender_id):
             else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
 
-    return '抱歉>< 我還無法處理這個問題，請您等待專人為您回答🙂'
+    return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 (若不需要再由機器人為您回答，請點擊"不是我要的答案"按鈕)'
 
 
 def send_message(recipient_id, message_text):
