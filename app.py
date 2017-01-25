@@ -128,40 +128,40 @@ def handle_message(message_text, sender_id):
         if u'下載'.encode("utf8") in message_text :
             return '您好🙂  校園授權軟體下載有兩種方式:\n1.校園授權網頁下載(需連線校內網路) http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\n2.成功大學mybox(校外網路可下載，但若需要進行啟用授權步驟仍得連進校內網路才能成功啟用，第一次使用mybox需開通。) https://mybox.ncku.edu.tw/ 登入後左邊"共用資料夾"可下載。'
         if u'金鑰'.encode("utf8") in message_text or u'過期'.encode("utf8") in message_text :
-            return '您好🙂  windows及office皆為校內網路授權，授權一次為180天，若一直在校外網路待授權期限一到便會出現過期訊息，請連線至校內網路(可使用vpn連回)並重新執行啟用檔再次取得180天授權即可，謝謝。\n校園授權軟體網頁:http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\nssl vpn: http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+            return '您好🙂  windows及office皆為校內網路授權，授權一次為180天，若一直在校外網路待授權期限一到便會出現過期訊息，請連線至校內網路(可使用vpn連回)並重新執行啟用檔再次取得180天授權即可，謝謝。\n校園授權軟體網頁:http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\nssl vpn: http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text :
         if u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text :
-            return '您好🙂  windows或office需至校園授權軟體網頁下載啟用檔，若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw \n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+            return '您好🙂  windows或office需至校園授權軟體網頁下載啟用檔，若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw \n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
         if u'無法'.encode("utf8") in message_text or u'失敗'.encode("utf8") in message_text :
-            return '您好🙂  若無法啟用，請確認是否已連線校內網路：google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n若已連線校內網路，請問您的錯誤代碼error code為何?(小黑框裡倒數幾行，類似0xC...，若非一般常見錯誤代碼請等待專人協助或於中心二樓服務台服務時間內攜帶筆電前往詢問)。\n若未連線至校內網路，請使用vpn服務連線至校內網路再作啟用。http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+            return '您好🙂  若無法啟用，請確認是否已連線校內網路：google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n若已連線校內網路，請問您的錯誤代碼error code為何?(小黑框裡倒數幾行，類似0xC...，若非一般常見錯誤代碼請等待專人協助或於中心二樓服務台服務時間內攜帶筆電前往詢問)。\n若未連線至校內網路，請使用vpn服務連線至校內網路再作啟用。http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
     if '0x80070005' in message_text :
         return '您好🙂  錯誤代碼:0x80070005，未使用系統管理員身份執行，請在啟用檔上按右鍵選擇"以系統管理員身份執行"。\n若按右鍵未出現"以系統管理員身份執行"選項，表示您尚未將下載的啟用壓縮檔解壓縮，請按右鍵解壓縮或是直接將內部檔案拉至桌面亦可，謝謝。'
     if '0xc004f074' in message_text :
-        return '您好🙂  錯誤代碼:0xc004F074，1.請確認是否已連線校內網路。google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n2.請確認電腦右下角時間是否正確。(時區及時間上下午都要對，時區確定為台北+8:00，再使用網路同步時間。)\n3.若您ip已是成大140.116 上述兩項亦沒問題卻認證失敗，請嘗試使用vpn連線後再行認證。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+        return '您好🙂  錯誤代碼:0xc004F074，1.請確認是否已連線校內網路。google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。\n2.請確認電腦右下角時間是否正確。(時區及時間上下午都要對，時區確定為台北+8:00，再使用網路同步時間。)\n3.若您ip已是成大140.116 上述兩項亦沒問題卻認證失敗，請嘗試使用vpn連線後再行認證。\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
     if 'script' in message_text :
         return '您好，找不到script可能是以下兩種情形\n1.啟用檔未解壓縮。若在檔案上按右鍵無"以系統管理員身份執行"選項，即可能未解壓縮，請按右鍵解壓縮或是直接將.bat檔拉至桌面亦可。\n2.啟用檔不符合軟體版本。若同一軟體有A.B兩種啟用檔，不知道用哪一個的話，可以兩個都下載下來解壓縮都啟用試試。\nhttp://www.cc.ncku.edu.tw/download/'
     if 'matlab' in message_text :
         if u'下載'.encode("utf8") in message_text or u'單機'.encode("utf8") in message_text :
-            return '您好🙂  Matlab單機版不需使用校內網路認證，請前往Mathworks網站(www.mathworks.com)，使用"學校Email"及說明文件裡的cdkey申請一組帳號即可取得授權及下載。\n(以下網址需連線校內網路)\n詳細說明文件: ftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single.pdf\nDetailed installation steps: ftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single_En.pdf\nhttp://www.cc.ncku.edu.tw/download/matlab.htm'
+            return '您好🙂  Matlab單機版不需使用校內網路認證，請前往Mathworks網站(www.mathworks.com)，使用"學校Email"及說明文件裡的cdkey申請一組帳號即可取得授權及下載。\n(以下網址需連線校內網路)\n詳細說明文件: ftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single.pdf'
         if 'license' in message_text or 'network' in message_text :
-            return '您好🙂  若您需要license.dat或network.lic表示您目前選擇使用的matlab版本為校園網路版(一開始安裝時有選項可選擇單機版或網路版)，檔案可至http://www.cc.ncku.edu.tw/download/matlab.htm 下載校園網路版連線授權檔(注意事項第三及第四點擇一下載即可)，校園網路版使用時需連線至校內網路才能取得授權。\n若為個人使用建議您改用單機版，單機版使用時無在校內網路使用的限制。若想轉換至單機版請參考:\n(以下網址需連線校內網路)\nftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single.pdf\nhttp://www.cc.ncku.edu.tw/download/matlab.htm'
+            return '您好🙂  若需要license.dat或network.lic表示您目前選擇使用的matlab版本為校園網路版，可至http://www.cc.ncku.edu.tw/download/matlab.htm 下載校園網路版連線授權檔(注意事項第三及第四點擇一下載即可)。校園網路版使用時需連線至校內網路才能取得授權。\n若為個人使用建議您改用單機版，單機版使用時無在校內網路使用的限制。若想轉換至單機版請參考:\n(以下網址需連線校內網路)\nftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single.pdf\n'
         if 'mac' in message_text or 'linux' in message_text :
             return '您好🙂  mac 或 linux版本可在申請單機版授權帳號後於matlab官網上登入下載。\n(以下網址需連線校內網路)\n詳細說明文件: ftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single.pdf\nDetailed installation steps: ftp://140.116.249.78/Mathworks/MatlabR2016A/MATLAB_TAH_Single_En.pdf\nhttp://www.cc.ncku.edu.tw/download/matlab.htm'
     if 'visual studio' in message_text :
         return '您好🙂  1.visual studio 無限制校內網路，安裝完即可使用。\n2.2013版前無需輸入序號，但2015版需要輸入序號:7DHGB-NW9XQ-Q9GT6-BMGMC-GQ7XY。\nhttp://www.cc.ncku.edu.tw/download/key.htm\n3.2013版可在成大mybox下載(無需校內網路)。'
     if u'網頁'.encode("utf8") in message_text :
         if 'forbidden' in message_text or 'access denied' in message_text or 'vpn' in message_text or u'校外'.encode("utf8") in message_text or u'拒絕顯示'.encode("utf8") in message_text or u'不能下載'.encode("utf8") in message_text or u'無法下載'.encode("utf8") in message_text or u'壞'.encode("utf8") in message_text :
-            return '您好🙂  1.請在網路和共用中心的網際網路中IP和DNA皆設定為自動取得，並從新開啟瀏覽器\n2.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n3.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝:)'
+            return '您好🙂  1.請在網路和共用中心的網際網路中IP和DNA皆設定為自動取得，並從新開啟瀏覽器\n2.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n3.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
         if u'開'.encode("utf8") in message_text or u'進'.encode("utf8") in message_text :
             if u'不'.encode("utf8") in message_text :
-                return '您好🙂  1.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n2.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請打「vpn連線教學」，謝謝~'
+                return '您好🙂  1.若無法進入校園授權軟體網頁，請使用vpn服務連線。\n2.若網頁打得開卻無法下載，可能只是打開網頁的暫存檔，同樣需使用vpn服務連線才能下載。\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝~'
     if u'vpn'.encode("utf8") in message_text :
         if u'安裝'.encode("utf8") in message_text or u'下載'.encode("utf8") in message_text or u'用'.encode("utf8") in message_text :
             return '您好🙂  請參考http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 的使用說明'
         if u'連'.encode("utf8") in message_text or u'卡'.encode("utf8") in message_text :
             return '您好🙂  如您是使用網頁版請到http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 下載連線軟體使用，並參考使用說明進行安裝及連線；若您是使用連線軟體，請先參考http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 的使用說明，並特別注意VPN使用完畢請登出以免影響下一次登入'
         if u'教學'.encode("utf8") in message_text or u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text :
-            return '您好🙂  1.開啟網頁 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw\n2.\na.網頁方式連線，請參照網頁。\nb.軟體方式連線(推薦)：\n(1)下載ssl vpn連線軟體，解壓縮後安裝。(2)程式集→執行Juniper Network/Network Connect.exe。(3)程式上方輸入登入網址：https://sslvpn9.twaren.net/ncku →執行。(4)輸入成大信箱(成功入口)帳密。登入後右下角圖示顯示已連線。(5)最後確認ip檢查是否連線成功:google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。'
+            return '您好🙂  1.開啟http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw\n2.下載ssl vpn連線軟體，解壓縮後安裝。\n3.程式集→執行Juniper Network/Network Connect.exe。\n4.輸入登入網址：https://sslvpn9.twaren.net/ncku →執行。\n5.輸入成大信箱/入口帳密。登入後右下角圖示顯示已連線。\n6.確認ip檢查是否連線成功:google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。'
 
 #=====================================================================
 
