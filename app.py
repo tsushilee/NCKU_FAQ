@@ -103,8 +103,6 @@ def handle_message(message_text, sender_id):
     if u'不是我要的答案'.encode("utf8") in message_text :
         return '請您等待專人為您回答🙂 '
 
-    if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
-        return '很高興能為您幫上忙～ 😀'
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
@@ -242,8 +240,11 @@ def handle_message(message_text, sender_id):
                 return '您的網路位置IP被暫停使用 請聯絡計網中心 😨 聯絡方式：（06）2757575 ext.61010'
             else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
+    if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
+        return '很高興能為您幫上忙～ 😀'
 
-    return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 (若不需要再由機器人為您回答，請點擊"不是我要的答案"按鈕)'
+
+    return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 '
 
 
 def send_message(recipient_id, message_text):
