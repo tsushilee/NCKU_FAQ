@@ -246,7 +246,7 @@ def handle_message(message_text, sender_id):
         if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
             return '很高興能為您幫上忙～ 😀'
 
-        if u'笨蛋'.encode("utf8") in message_text or u'弱'.encode("utf8") in message_text u'爛'.encode("utf8") in message_text or u'白痴'.encode("utf8") in message_text or u'白癡'.encode("utf8") in message_text or u'智障'.encode("utf8") in message_text :
+        if u'笨蛋'.encode("utf8") in message_text or u'弱'.encode("utf8") in message_text or u'爛'.encode("utf8") in message_text or u'白痴'.encode("utf8") in message_text or u'白癡'.encode("utf8") in message_text or u'智障'.encode("utf8") in message_text :
             return '因為我還在學習當中嘛，不要這樣～～'
 
         if u'沒有'.encode("utf8") in message_text :
