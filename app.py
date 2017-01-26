@@ -242,14 +242,14 @@ def handle_message(message_text, sender_id):
 
     #閒聊  字數不能太多
 
-    if len(message_text ) < 15 :
+    if len( message_text ) < 20 :
         if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
             return '很高興能為您幫上忙～ 😀'
 
         if u'笨蛋'.encode("utf8") in message_text or u'弱'.encode("utf8") in message_text or u'爛'.encode("utf8") in message_text or u'白痴'.encode("utf8") in message_text or u'白癡'.encode("utf8") in message_text or u'智障'.encode("utf8") in message_text :
             return '因為我還在學習當中嘛，不要這樣～～'
 
-        if u'沒有'.encode("utf8") in message_text :
+        if u'沒'.encode("utf8") in message_text :
             if u'女朋友'.encode("utf8") in message_text or u'女友'.encode("utf8") in message_text or u'男朋友'.encode("utf8") in message_text or u'男友'.encode("utf8") in message_text :
                 return '我們可以一起繼續魯下去👻'
 
@@ -299,7 +299,7 @@ def handle_message(message_text, sender_id):
             return '大吉大利，從來沒有這麼好過'
 
         if u'新年快樂'.encode("utf8") in message_text or u'恭喜發財'.encode("utf8") in message_text :
-            return '🏮🏮\n恭喜發財，紅包拿來\n🏮🏮'
+            return '🏮恭喜發財，紅包拿來🏮'
 
     return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 '
 
