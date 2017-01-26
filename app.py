@@ -169,7 +169,7 @@ def handle_message(message_text, sender_id):
         if u'無法'.encode("utf8") in message_text or u'忘'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text :
             return '您好🙂  選課系統與成功入口帳號密碼是一樣的，請先試登入成功入口到右上方設定做密碼變更，若成功入口也沒有辦法登入，則需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務。'
 
-    #選課
+    #moodle
     if u'moodle'.encode("utf8") in message_text :
         if u'無法'.encode("utf8") in message_text or u'忘'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text :
             return '您好🙂  moodle系統與成功入口帳號密碼是一樣的，請先試登入成功入口到右上方設定做密碼變更，若成功入口也沒有辦法登入，則需要修改成功入口密碼,請攜帶雙證件(學生證以及身分證)於上班時間到計算機中心一樓服務台,做更改密碼之服務。'
@@ -240,9 +240,66 @@ def handle_message(message_text, sender_id):
                 return '您的網路位置IP被暫停使用 請聯絡計網中心 😨 聯絡方式：（06）2757575 ext.61010'
             else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
-    if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
-        return '很高興能為您幫上忙～ 😀'
+    #閒聊  字數不能太多
 
+    if len(message_text ) < 15 :
+        if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
+            return '很高興能為您幫上忙～ 😀'
+
+        if u'笨蛋'.encode("utf8") in message_text or u'弱'.encode("utf8") in message_text u'爛'.encode("utf8") in message_text or u'白痴'.encode("utf8") in message_text or u'白癡'.encode("utf8") in message_text or u'智障'.encode("utf8") in message_text :
+            return '因為我還在學習當中嘛，不要這樣～～'
+
+        if u'沒有'.encode("utf8") in message_text :
+            if u'女朋友'.encode("utf8") in message_text or u'女友'.encode("utf8") in message_text or u'男朋友'.encode("utf8") in message_text or u'男友'.encode("utf8") in message_text :
+                return '我們可以一起繼續魯下去👻'
+
+        if u'天氣'.encode("utf8") in message_text :
+            return '這裡有最新的天氣狀況哦🙂 https://tw.news.yahoo.com/weather/'
+
+        if u'睡覺'.encode("utf8") in message_text or u'睡著'.encode("utf8") in message_text :
+            return '🐷'
+
+        if u'大便'.encode("utf8") in message_text or u'尿'.encode("utf8") in message_text :
+            return '您先請'
+
+        if u'喜歡你'.encode("utf8") in message_text or u'愛你'.encode("utf8") in message_text :
+            return '對不起 我心有所屬了😳'
+
+        if u'單身'.encode("utf8") in message_text :
+            return '對，我就是在等你 💗'
+
+        if u'再見'.encode("utf8") in message_text or u'掰掰'.encode("utf8") in message_text :
+            return '有緣再相會～🙂'
+
+        if u'唱歌'.encode("utf8") in message_text :
+            return '我不會唱歌，但我可以給你youtube哦！！🙂  https://www.youtube.com/'
+
+        if u'難過'.encode("utf8") in message_text :
+            return '我難過的是放棄你放棄愛～https://www.youtube.com/watch?v=T0LfHEwEXXw'
+
+        if u'失戀'.encode("utf8") in message_text :
+            return '天涯何處無芳草，何必單戀一枝花'
+
+        if u'你是誰'.encode("utf8") in message_text :
+            return '我是可愛的機器人'
+
+        if u'講笑話'.encode("utf8") in message_text or u'聽笑話'.encode("utf8") in message_text :
+            return '老師:大雄.老師給你90元，你再去跟胖虎借10元，這樣你總共有多少錢？\n大雄:0元。...\n老師:你根本不懂數學了!!!!!!\n大雄:你根本不懂胖虎......'
+
+        if u'星期幾'.encode("utf8") in message_text or u'幾點'.encode("utf8") in message_text :
+            return '麻煩請往螢幕角落看'
+
+        if u'我帥'.encode("utf8") in message_text or u'我很帥'.encode("utf8") in message_text :
+            return '帥到分手'
+
+        if u'討厭你'.encode("utf8") in message_text :
+            return '嗚嗚嗚嗚嗚嗚嗚嗚嗚😭'
+
+        if u'運勢'.encode("utf8") in message_text :
+            return '大吉大利，從來沒有這麼好過'
+
+        if u'新年快樂'.encode("utf8") in message_text or u'恭喜發財'.encode("utf8") in message_text :
+            return '🏮🏮\n恭喜發財，紅包拿來\n🏮🏮'
 
     return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 '
 
