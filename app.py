@@ -244,7 +244,7 @@ def handle_message(message_text, sender_id):
 
     #閒聊  字數不能太多
 
-    if len( message_text ) < 20 :
+    if len( message_text ) < 28 :
         if u'謝謝'.encode("utf8") in message_text or u'感謝'.encode("utf8") in message_text :
             return '很高興能為您幫上忙～ 😀'
 
