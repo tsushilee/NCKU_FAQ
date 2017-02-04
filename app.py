@@ -120,15 +120,6 @@ def handle_message(message_text, sender_id):
 
 #====================================================================
     #授權軟體
-    if u'軟體'.encode("utf8") in message_text or 'win' in message_text or 'office' in message_text :
-        if u'借'.encode("utf8") in message_text or u'光碟'.encode("utf8") in message_text:
-            return '您好🙂  若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
-        if u'下載'.encode("utf8") in message_text :
-            return '您好🙂  校園授權軟體下載有兩種方式:\n1.校園授權網頁下載(需連線校內網路) http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\n2.成功大學mybox(校外網路可下載，但若需要進行啟用授權步驟仍得連進校內網路才能成功啟用，第一次使用mybox需開通。) https://mybox.ncku.edu.tw/ 登入後左邊"共用資料夾"可下載。'
-        if u'金鑰'.encode("utf8") in message_text or u'過期'.encode("utf8") in message_text :
-            return '您好🙂  windows及office皆為校內網路授權，授權一次為180天，若一直在校外網路待授權期限一到便會出現過期訊息，請連線至校內網路(可使用vpn連回)並重新執行啟用檔再次取得180天授權即可，謝謝。\n校園授權軟體網頁:http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\nssl vpn: http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
-        return '請參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw ，謝謝。'
-
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text :
         if u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text :
             return '您好🙂  windows或office需至校園授權軟體網頁下載啟用檔，若您在學校以外的網路,啟用授權軟體時必須先啟動vpn,才能進行產品認證 http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw \n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
@@ -162,6 +153,15 @@ def handle_message(message_text, sender_id):
             return '您好🙂  如您是使用網頁版請到http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 下載連線軟體使用，並參考使用說明進行安裝及連線；若您是使用連線軟體，請先參考http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw 的使用說明，並特別注意VPN使用完畢請登出以免影響下一次登入'
         if u'教學'.encode("utf8") in message_text or u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text :
             return '您好🙂  1.開啟http://cc.ncku.edu.tw/files/11-1255-7637-1.php?Lang=zh-tw\n2.下載ssl vpn連線軟體，解壓縮後安裝。\n3.程式集→執行Juniper Network/Network Connect.exe。\n4.輸入登入網址：https://sslvpn9.twaren.net/ncku →執行。\n5.輸入成大信箱/入口帳密。登入後右下角圖示顯示已連線。\n6.確認ip檢查是否連線成功:google 「IP 查詢」→進第一個連結。確認IP為成大IP(140.116.XXX.XXX)。'
+
+    if u'軟體'.encode("utf8") in message_text or 'win' in message_text or 'office' in message_text :
+        if u'借'.encode("utf8") in message_text or u'光碟'.encode("utf8") in message_text:
+            return '您好🙂  若需要校園授權軟體可參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw 或是可以於計網中心服務時間帶一張證件至２樓借用光碟'
+        if u'下載'.encode("utf8") in message_text :
+            return '您好🙂  校園授權軟體下載有兩種方式:\n1.校園授權網頁下載(需連線校內網路) http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\n2.成功大學mybox(校外網路可下載，但若需要進行啟用授權步驟仍得連進校內網路才能成功啟用，第一次使用mybox需開通。) https://mybox.ncku.edu.tw/ 登入後左邊"共用資料夾"可下載。'
+        if u'金鑰'.encode("utf8") in message_text or u'過期'.encode("utf8") in message_text :
+            return '您好🙂  windows及office皆為校內網路授權，授權一次為180天，若一直在校外網路待授權期限一到便會出現過期訊息，請連線至校內網路(可使用vpn連回)並重新執行啟用檔再次取得180天授權即可，謝謝。\n校園授權軟體網頁:http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\nssl vpn: http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
+        return '請參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw ，謝謝。'
 
 #=====================================================================
 
