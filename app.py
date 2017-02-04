@@ -118,6 +118,12 @@ def handle_message(message_text, sender_id):
         if 'outlook' in message_text :
             return '您好🙂 可參考計中說明文件 http://cc.ncku.edu.tw/files/11-1255-14653.php?Lang=zh-tw'
 
+    #電腦教室開放時間
+    if u'電腦'.encode("utf8") in message_text or u'教室'.encode("utf8") in message_text or u'中心'.encode("utf8") in message_text :
+        if u'開'.encode("utf8") in message_text or u'用'.encode("utf8") in message_text or u'借'.encode("utf8") in message_text :
+            return '您好🙂  電腦教室相關訊息請參考 http://cc.ncku.edu.tw/files/11-1255-3303.php?Lang=zh-tw ，謝謝。'
+
+
 #====================================================================
     #授權軟體
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text :
@@ -161,7 +167,7 @@ def handle_message(message_text, sender_id):
             return '您好🙂  校園授權軟體下載有兩種方式:\n1.校園授權網頁下載(需連線校內網路) http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\n2.成功大學mybox(校外網路可下載，但若需要進行啟用授權步驟仍得連進校內網路才能成功啟用，第一次使用mybox需開通。) https://mybox.ncku.edu.tw/ 登入後左邊"共用資料夾"可下載。'
         if u'金鑰'.encode("utf8") in message_text or u'過期'.encode("utf8") in message_text :
             return '您好🙂  windows及office皆為校內網路授權，授權一次為180天，若一直在校外網路待授權期限一到便會出現過期訊息，請連線至校內網路(可使用vpn連回)並重新執行啟用檔再次取得180天授權即可，謝謝。\n校園授權軟體網頁:http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw\nssl vpn: http://cc.ncku.edu.tw/files/11-1255-7637.php?Lang=zh-tw\n\n**若需要vpn連線教學請輸入「vpn教學」，謝謝:)'
-        return '請參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw ，謝謝。'
+        return '您好🙂  請參考 http://cc.ncku.edu.tw/files/11-1255-6834-1.php?Lang=zh-tw ，謝謝。'
 
 #=====================================================================
 
