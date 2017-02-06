@@ -123,8 +123,56 @@ def handle_message(message_text, sender_id):
         if u'開'.encode("utf8") in message_text or u'用'.encode("utf8") in message_text or u'借'.encode("utf8") in message_text :
             return '您好🙂  電腦教室相關訊息請參考 http://cc.ncku.edu.tw/files/11-1255-3303.php?Lang=zh-tw ，謝謝。'
 
+    #dorm
+    if u'宿'.encode("utf8") in message_text :
+        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
+            return '您好🙂  1.請您使用其他電腦進行交叉測試 http://www.cc.ncku.edu.tw/dorm/doc/check.php\n 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
+        if 'p2p' in message_text :
+            return '您好🙂  因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.🙂'
+        if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
+            return '您好🙂  若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候🙂'
+        if 'authentication failed' in message_text :
+            return '您好🙂  出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 \n2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
+        return '請參考宿網管理系統FAQ http://www.cc.ncku.edu.tw/dorm/doc/FAQ.php '
 
-#====================================================================
+    if u'資安通報'.encode("utf8") in message_text :
+        return '您好🙂  需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓🙂'
+
+    if len(ip) > 0 :
+        # start = message_text.find("ip:")
+        # mac_start = message_text.find("mac:")
+        # end = 0
+        # mac_end = 0
+        # if start >= 0 :
+        #     for i in range(len(message_text)) :
+        #         if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
+        #             end = i
+        #             break
+        #
+        #     for i in range(len(message_text)) :
+        #         if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
+        #             mac_end = i
+        #             break
+        #     ip = message_text[start+3:end]
+        #     mac = message_text[mac_start+4:mac_end]
+        #     print(ip)
+        #     print(mac)
+
+            data = {}
+            data['ip'] = unicode(ip[0])
+            data['mac'] = u'xx:xx:xx:xx:xx:xx nothing here'
+            url_values = urllib.urlencode(data)
+            print(url_values)
+            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
+
+            response = urllib.urlopen(full_url).read()
+            print(response)
+            if response == 'found!':
+                return '您的網路位置IP被暫停使用 請聯絡計網中心 😨 聯絡方式：（06）2757575 ext.61010'
+            else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
+
+
+
     #授權軟體
     if u'啟動'.encode("utf8") in message_text or u'啟用'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text :
         if u'如何'.encode("utf8") in message_text or u'怎麼'.encode("utf8") in message_text or u'想'.encode("utf8") in message_text or u'要'.encode("utf8") in message_text :
@@ -200,53 +248,6 @@ def handle_message(message_text, sender_id):
     if u'成績'.encode("utf8") in message_text :
         return '您好🙂  請由成功入口進去後，E-portfolio數位學習歷程檔裡就有成績查詢的選項 ， 或由註冊組網頁連到成績查詢網頁。( 註冊組 -> 線上服務 -> 學生 -> 成績查詢 )'
 
-    #dorm
-    if u'宿'.encode("utf8") in message_text :
-        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '您好🙂  1.請您使用其他電腦進行交叉測試 http://www.cc.ncku.edu.tw/dorm/doc/check.php\n 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
-        if 'p2p' in message_text :
-            return '您好🙂  因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.🙂'
-        if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
-            return '您好🙂  若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候🙂'
-        if 'authentication failed' in message_text :
-            return '您好🙂  出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 \n2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
-        return '請參考宿網管理系統FAQ http://www.cc.ncku.edu.tw/dorm/doc/FAQ.php '
-
-    if u'資安通報'.encode("utf8") in message_text :
-        return '您好🙂  需要填寫資安通報，可以先從 https://goo.gl/YzegaO 這裡下載通報檔案，填寫完後直接回傳至security@mail.ncku.edu.tw 這個信箱，或是繳交紙本到計網中心一樓🙂'
-
-    if len(ip) > 0 :
-        # start = message_text.find("ip:")
-        # mac_start = message_text.find("mac:")
-        # end = 0
-        # mac_end = 0
-        # if start >= 0 :
-        #     for i in range(len(message_text)) :
-        #         if i > (start + 4) and message_text[i] == " " : #  first whitespace after "ip:"
-        #             end = i
-        #             break
-        #
-        #     for i in range(len(message_text)) :
-        #         if i > (mac_start + 4) and message_text[i] == " " : #  first whitespace after "mac:"
-        #             mac_end = i
-        #             break
-        #     ip = message_text[start+3:end]
-        #     mac = message_text[mac_start+4:mac_end]
-        #     print(ip)
-        #     print(mac)
-
-            data = {}
-            data['ip'] = unicode(ip[0])
-            data['mac'] = u'xx:xx:xx:xx:xx:xx nothing here'
-            url_values = urllib.urlencode(data)
-            print(url_values)
-            full_url = 'https://script.google.com/macros/s/AKfycbwdyCdon5MQYAz-U-WbP-EVgvymqnx5-k9AHDVBd2ZJ1CgShto/exec' + '?' + unicode(url_values)
-
-            response = urllib.urlopen(full_url).read()
-            print(response)
-            if response == 'found!':
-                return '您的網路位置IP被暫停使用 請聯絡計網中心 😨 聯絡方式：（06）2757575 ext.61010'
-            else : return '您的網路位置IP不在鎖網名單中，並非被暫停使用，請留下資料將有專人為您服務🙂'
 
     #閒聊  字數不能太多
 
