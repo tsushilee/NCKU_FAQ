@@ -310,7 +310,6 @@ def handle_message(message_text, sender_id):
         if u'新年快樂'.encode("utf8") in message_text or u'恭喜發財'.encode("utf8") in message_text :
             return '🏮恭喜發財，紅包拿來🏮'
 
-    user_dict[sender_id] = time.time()
     return '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 '
 
 
