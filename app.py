@@ -74,7 +74,7 @@ def webhook():
                             print(user_dict[key])
 
                         if not sender_id in user_dict : # not in time interval
-                            #if reply == '請您等待專人為您回答' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停30min
+                            if reply == '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 ' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停
                             send_message( sender_id, reply )
                         pass
 
@@ -125,14 +125,15 @@ def handle_message(message_text, sender_id):
 
     #dorm
     if u'宿'.encode("utf8") in message_text :
-        if u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法使用'.encode("utf8") in message_text:
-            return '您好🙂  1.請您使用其他電腦進行交叉測試 http://www.cc.ncku.edu.tw/dorm/doc/check.php\n 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
         if 'p2p' in message_text :
             return '您好🙂  因使用P2P有侵權問題, 本校校園網路禁止使用P2P, 故本校宿網亦禁止使用P2P, 除非是特殊學術用途之使用, 可另行申請.🙂'
-        if u'故障'.encode("utf8") in message_text or u'網路孔壞掉'.encode("utf8") in message_text :
+        if u'故障'.encode("utf8") in message_text or u'網路孔'.encode("utf8") in message_text :
             return '您好🙂  若確認網路有故障，麻煩至http://www.cc.ncku.edu.tw/dorm/ 進行使用者登入後進行故障申告，會由工程師為你處理，請耐心等候🙂'
         if 'authentication failed' in message_text :
             return '您好🙂  出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 \n2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
+        if u'不通'.encode("utf8") in message_text or u'不能'.encode("utf8") in message_text or u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or u'無法'.encode("utf8") in message_text:
+            return '您好🙂  1.請您使用其他電腦進行交叉測試 http://www.cc.ncku.edu.tw/dorm/doc/check.php\n 2.請您查看是否有被停權，http://www.cc.ncku.edu.tw/dorm/disable/index.php  \n若依然無法排除問題 請回覆您的IP\n "IP:140.116.xxx.xxx" \n計網中心將為您查詢'
+
         return '請參考宿網管理系統FAQ http://www.cc.ncku.edu.tw/dorm/doc/FAQ.php '
 
     if u'資安通報'.encode("utf8") in message_text :
