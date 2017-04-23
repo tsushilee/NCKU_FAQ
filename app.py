@@ -101,7 +101,7 @@ def handle_message(message_text, sender_id):
     ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', message_text )
 
     if u'不是我要的答案'.encode("utf8") in message_text :
-        return '請您等待專人為您回答🙂 '
+        return '請您等待專人為您回答🙂  '
 
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
