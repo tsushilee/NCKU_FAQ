@@ -106,7 +106,7 @@ def handle_message(message_text, sender_id):
 
     if u'你好'.encode("utf8") in message_text or u'請問'.encode("utf8") in message_text or u'嗨'.encode("utf8") in message_text or u'哈囉'.encode("utf8") in message_text or 'hi' in message_text or 'hello' in message_text:
         if len(message_text ) < 10:
-            return '你好！🙂\n請問我能為您做些什麼？'
+            return '你好！🙂\n請問我能為您做些什麼？ '
     # Email
     if u'信'.encode("utf8") in message_text or 'e-mail' in message_text or 'e mail' in message_text or 'email' in message_text or 'mail' in message_text :
         if u'進入'.encode("utf8") in message_text or u'登'.encode("utf8") in message_text or u'使用'.encode("utf8") in message_text or u'密碼錯誤'.encode("utf8") in message_text:
