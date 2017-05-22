@@ -4,12 +4,14 @@ import sys
 import json
 import editdistance
 import threading, time
+import template_json
 import urllib2
 import urllib
 import re
 
 import requests
 from flask import Flask, request
+from set_workflow import set_temp
 
 app = Flask(__name__)
 
@@ -67,18 +69,34 @@ def webhook():
                         message_text = messaging_event["message"]["text"]  # the message's text
                         message_text = message_text.encode('utf-8').lower()
 
-                        reply = handle_message( message_text, sender_id )
+                        # dorm internet workflow
+                        if "quick_reply" in messaging_event["message"] :
+                            payload = messaging_event["message"]["quick_reply"]["payload"]
+                            if payload == 'GOT_IT' :
+                                send_message( sender_id, '很高興能為你幫上忙🙂' )
+                            elif payload == 'ROLL_BACK' :
+                                faq = template_json.Template_json(sender_id,template_type=2,
+                                      text="是否曾申請過帳號呢? (請用是/否按扭回答以便記錄)", payload_yes = "START_STATE_YES", payload_no = "START_STATE_NO" )
+                                send_template_message( faq )
+                            else :
+                                reply = set_temp(payload, sender_id)
+                                send_template_message( reply )
 
-                        for key in user_dict.keys() :
-                            print(key)
-                            print(user_dict[key])
+                        else :
+                            reply = handle_message( message_text, sender_id )
 
-                        if not sender_id in user_dict : # not in time interval
-                            #暫時拿掉限制
-                            #if reply == '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 ' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停
+                            for key in user_dict.keys() :
+                                print(key)
+                                print(user_dict[key])
 
-                            send_message( sender_id, reply )
-                        pass
+                            if not sender_id in user_dict : # not in time interval
+                                #暫時拿掉限制
+                                #if reply == '抱歉> < 我還無法處理這個問題，請您等待專人為您回答🙂 ' : user_dict[sender_id] = time.time() #使用者待專人回答, chatbot對該使用者暫停
+                                if type(reply) == str :
+                                    send_message( sender_id, reply )
+                                else : #template
+                                    send_template_message(reply)
+                            pass
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -351,6 +369,10 @@ def send_message(recipient_id, message_text):
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
+
+def send_template_message(reply):
+    data = json.dumps(reply.template)
+    sendtofb(data)
 
 
 def log(message):  # simple wrapper for logging to stdout on heroku
