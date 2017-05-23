@@ -153,7 +153,7 @@ def handle_message(message_text, sender_id):
         if 'authentication failed' in message_text :
             return '您好🙂  出現 "Authentication failed." 訊息, 有二種可能: 1. 帳號或密碼輸入錯誤，請重新輸入再試一下。若不確定是否正確，可借室友電腦登入宿網管理系統看看。 \n2. 帳號被停用，登入宿網管理系統，查詢登錄資料，若被停用，在最後一項”特殊限制”中，會註明停用原因。'
         if u'不通'.encode("utf8") in message_text or u'不能'.encode("utf8") in message_text or u'斷'.encode("utf8") in message_text or u'認證'.encode("utf8") in message_text or u'連'.encode("utf8") in message_text or \
-           u'無法'.encode("utf8") in message_text or u'問題'.encode("utf8") in message_text::
+           u'無法'.encode("utf8") in message_text or u'問題'.encode("utf8") in message_text:
             faq = template_json.Template_json(sender_id,template_type=2,
                    text="是否曾申請過帳號呢? (請用是/否按扭回答以便記錄)", payload_yes = "START_STATE_YES", payload_no = "START_STATE_NO" )
             return faq
